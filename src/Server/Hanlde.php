@@ -21,7 +21,7 @@ abstract class Hanlde
         $return = [];
         try {
             
-            if (!method_exists($this, $name)||$name=='deal'||in_array($name,$this->filter)) {
+            if (!method_exists($this, $name)||$name=='deal'||$name=='__construct'||in_array($name,$this->filter)) {
                 $return['status'] = 0;
                 $return['msg'] = '执行失败,'.$name.'方法不存在';
                 $return['data'] =null;
