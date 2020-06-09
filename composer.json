@@ -1,0 +1,25 @@
+{
+    "name": "clouds-flight/swoole-rpc",
+    "description": "library for swoole rpc",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "吴云祥",
+            "email": "1730848300@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Swoole\\Rpc\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\": "test"
+        }
+    },
+    "require": {
+        "clouds-flight/easy-consul":"dev-master"
+    }
+}
