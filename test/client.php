@@ -7,7 +7,7 @@ require __DIR__ . '/bootstrap.php';
 /*
  * @Author: 吴云祥
  * @Date: 2020-06-07 17:39:48
- * @LastEditTime: 2020-06-09 10:49:52
+ * @LastEditTime: 2020-06-09 12:35:24
  * @FilePath: /swoole-rpc/test/client.php
  */ 
 
@@ -39,6 +39,6 @@ if(count($services)>0)
     var_dump($client1->add(1,2));
     $client1->unLock();
     $client2=$clientFactory->getClient($services[0]->host,$services[0]->port);
-    var_dump($client2->del(1,2));
+    var_dump($client2->notAllow());
 }
 
