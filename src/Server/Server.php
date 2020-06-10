@@ -3,11 +3,12 @@
 /*
  * @Author: 吴云祥
  * @Date: 2020-06-07 12:22:53
- * @LastEditTime: 2020-06-10 09:53:46
+ * @LastEditTime: 2020-06-10 09:59:18
  * @FilePath: /pf-connection-server/vendor/clouds-flight/swoole-rpc/src/Server/Server.php
  */
 
 namespace Swoole\Rpc\Server;
+
 use Swoole\Rpc\Service;
 
 class Server
@@ -22,12 +23,12 @@ class Server
     private $register;
 
 
-    private function __construct(ServiceRegisterInterface $register=null)
+    private function __construct(ServiceRegisterInterface $register = null)
     {
         $this->register = $register;
     }
 
-    public static function getInstance(ServiceRegisterInterface $register=null)
+    public static function getInstance(ServiceRegisterInterface $register = null)
     {
         if (null === static::$instance) {
             self::$instance = new self($register);
@@ -45,13 +46,15 @@ class Server
         $this->server = $server;
         if ($this->server == null) {
             $this->server = new \Swoole\Server('0.0.0.0', 0);
+            $this->server->on('receive', function ($serv, $fd, $from_id, $data) {
+                
+            });
         }
 
 
         foreach ($this->services as $service) {
 
-            if($service->isRpc)
-            {
+            if ($service->isRpc) {
                 $port = $this->server->listen($service->host, $service->port, SWOOLE_SOCK_TCP);
                 $options = $service->options;
                 $options['open_length_check'] = 1;
@@ -59,7 +62,7 @@ class Server
                 $options['package_length_offset'] = 0;
                 $options['package_body_offset'] = 4;
                 $port->set($options);
-                $service->handle->server=$this->server;
+                $service->handle->server = $this->server;
                 $port->on('receive', function ($serv, $fd, $from_id, $data) use ($service) {
                     $message = new Message($service->hook);
                     $msg = $message->unpack($data);
@@ -69,17 +72,11 @@ class Server
                 });
             }
 
-            if($this->register!=null)
-            {
+            if ($this->register != null) {
                 $this->register->register($service);
             }
-            
         }
 
-        $this->server->on('receive',function($serv, $fd, $from_id, $data)
-        {
-          
-        });
 
         $this->server->start();
     }
