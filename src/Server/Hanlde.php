@@ -3,8 +3,8 @@
 /*
  * @Author: 吴云祥
  * @Date: 2020-06-08 21:04:30
- * @LastEditTime: 2020-06-09 12:27:36
- * @FilePath: /swoole-rpc/src/Server/Hanlde.php
+ * @LastEditTime: 2020-06-10 09:53:27
+ * @FilePath: /pf-connection-server/vendor/clouds-flight/swoole-rpc/src/Server/Hanlde.php
  */
 
 namespace Swoole\Rpc\Server;
@@ -14,6 +14,8 @@ abstract class Hanlde
 {
 
     private $filter=[];
+
+    public $server;
 
     public function deal($name, $arguments)
     {

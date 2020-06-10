@@ -3,8 +3,8 @@
 /*
  * @Author: 吴云祥
  * @Date: 2020-06-07 12:22:53
- * @LastEditTime: 2020-06-09 10:55:34
- * @FilePath: /swoole-rpc/src/Server/Server.php
+ * @LastEditTime: 2020-06-10 09:53:46
+ * @FilePath: /pf-connection-server/vendor/clouds-flight/swoole-rpc/src/Server/Server.php
  */
 
 namespace Swoole\Rpc\Server;
@@ -59,7 +59,7 @@ class Server
                 $options['package_length_offset'] = 0;
                 $options['package_body_offset'] = 4;
                 $port->set($options);
-    
+                $service->handle->server=$this->server;
                 $port->on('receive', function ($serv, $fd, $from_id, $data) use ($service) {
                     $message = new Message($service->hook);
                     $msg = $message->unpack($data);
