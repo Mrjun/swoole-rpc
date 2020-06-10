@@ -3,7 +3,7 @@
 /*
  * @Author: 吴云祥
  * @Date: 2020-06-08 22:16:37
- * @LastEditTime: 2020-06-10 08:23:49
+ * @LastEditTime: 2020-06-10 08:34:18
  * @FilePath: /pf-connection-server/vendor/clouds-flight/swoole-rpc/src/Server/ConsulServiceRegister.php
  */
 
@@ -36,15 +36,15 @@ class ConsulServiceRegister implements ServiceRegisterInterface
         $serviceHelper->port = $service->port;
 
         if (isset($service->extends['tags'])) {
-            $serviceHelper->enableTagOverride = $service->extends['tags'];
+            $serviceHelper->tags = $service->extends['tags'];
         }
 
         if (isset($service->extends['meta'])) {
-            $serviceHelper->enableTagOverride = $service->extends['meta'];
+            $serviceHelper->meta = $service->extends['meta'];
         }
 
         if (isset($service->extends['taggedAddresses'])) {
-            $serviceHelper->enableTagOverride = $service->extends['taggedAddresses'];
+            $serviceHelper->taggedAddresses = $service->extends['taggedAddresses'];
         }
 
         if (isset($service->extends['enableTagOverride'])) {
@@ -56,39 +56,39 @@ class ConsulServiceRegister implements ServiceRegisterInterface
         }
 
         if (isset($service->extends['checks'])) {
-            $serviceHelper->check = $service->extends['checks'];
+            $serviceHelper->checks = $service->extends['checks'];
         }
 
         if (isset($service->extends['kind'])) {
-            $serviceHelper->check = $service->extends['kind'];
+            $serviceHelper->kind = $service->extends['kind'];
         }
 
         if (isset($service->extends['proxyDestination'])) {
-            $serviceHelper->check = $service->extends['proxyDestination'];
+            $serviceHelper->proxyDestination = $service->extends['proxyDestination'];
         }
 
         if (isset($service->extends['proxy'])) {
-            $serviceHelper->check = $service->extends['proxy'];
+            $serviceHelper->proxy = $service->extends['proxy'];
         }
 
         if (isset($service->extends['expose'])) {
-            $serviceHelper->check = $service->extends['expose'];
+            $serviceHelper->expose = $service->extends['expose'];
         }
 
         if (isset($service->extends['connect'])) {
-            $serviceHelper->check = $service->extends['connect'];
+            $serviceHelper->connect = $service->extends['connect'];
         }
 
         if (isset($service->extends['weights'])) {
-            $serviceHelper->check = $service->extends['weights'];
+            $serviceHelper->weights = $service->extends['weights'];
         }
 
         if (isset($service->extends['token'])) {
-            $serviceHelper->check = $service->extends['token'];
+            $serviceHelper->token = $service->extends['token'];
         }
 
         if (isset($service->extends['namespace'])) {
-            $serviceHelper->check = $service->extends['namespace'];
+            $serviceHelper->namespace = $service->extends['namespace'];
         }
 
         return $serviceHelper->register();
