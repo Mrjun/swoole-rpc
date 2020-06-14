@@ -2,8 +2,8 @@
 /*
  * @Author: 吴云祥
  * @Date: 2020-06-08 08:50:03
- * @LastEditTime: 2020-06-09 10:49:17
- * @FilePath: /swoole-rpc/src/Client/ClientFactory.php
+ * @LastEditTime: 2020-06-14 10:38:25
+ * @FilePath: /pf-connection-server/vendor/clouds-flight/swoole-rpc/src/Client/ClientFactory.php
  */
 
 namespace Swoole\Rpc\Client;
@@ -35,7 +35,7 @@ class ClientFactory
         return self::$instance;
     }
 
-    public function getClient($host, $port, $options = [], LogInterface $log = null, MessageHook $hook = null)
+    public function getClient($host, $port,$timeout=1, $options = [], LogInterface $log = null, MessageHook $hook = null)
     {
         
         $server = $host . ':' . $port;
@@ -66,7 +66,7 @@ class ClientFactory
             $this->locks[$server] = new \Swoole\Lock(SWOOLE_MUTEX);
         }
     
-        $client = new Client($host, $port, $options, $log, $hook);
+        $client = new Client($host, $port,$timeout, $options, $log, $hook);
         $client->lock();
 
         $this->locks[$server]->lock();

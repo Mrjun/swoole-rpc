@@ -2,8 +2,8 @@
 /*
  * @Author: 吴云祥
  * @Date: 2020-06-07 12:23:01
- * @LastEditTime: 2020-06-09 10:53:55
- * @FilePath: /swoole-rpc/src/Client/Client.php
+ * @LastEditTime: 2020-06-14 10:39:24
+ * @FilePath: /pf-connection-server/vendor/clouds-flight/swoole-rpc/src/Client/Client.php
  */
 
 namespace Swoole\Rpc\Client;
@@ -28,7 +28,9 @@ class Client
 
     private $log;
 
-    public function __construct($host, $port, $options=[], LogInterface $log=null, MessageHook $hook = null)
+    private $timeout;
+
+    public function __construct($host, $port,$timeout, $options=[], LogInterface $log=null, MessageHook $hook = null)
     {
         $this->client = new \Swoole\Client(SWOOLE_SOCK_TCP);
         $this->host = $host;
@@ -36,6 +38,8 @@ class Client
         $this->options = $options;
         $this->log = $log;
         $this->hook = $hook;
+
+        $this->timeout=$timeout;
 
         $this->options['open_length_check'] = 1;
         $this->options['package_length_type'] = 'V';
@@ -75,7 +79,7 @@ class Client
 
         if (!$this->client->isConnected()) {
 
-            if (!$this->client->connect($this->host, $this->port)) {
+            if (!$this->client->connect($this->host, $this->port,$this->timeout)) {
                 if($this->log!=null)
                 {
                     $this->log->log(LogType::ERROR, '连接' . $this->host . ':' . $this->port . '失败');
