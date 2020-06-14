@@ -101,7 +101,8 @@
          //获取客户端连接
          $client1=$clientFactory->getClient($services[0]->host,$services[0]->port);
          
-         //getClient($host, $port, $options = [], LogInterface $log = null, MessageHook $hook = null)
+         //getClient($host, $port, $timeout, $options = [], LogInterface $log = null, MessageHook $hook = null)
+         //$timeout(超时时间，包括连接、读写)
          //$options 为 swoole/client set 函数参数
          //$log   日志类实例，可自行实现 LogInterface，创建对象后传入,日志类型为 LogType::ERROR 时表示 连接rpc服务器端失败，可通过该消息
          //进行错误提醒等功能
